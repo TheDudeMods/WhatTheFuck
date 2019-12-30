@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Background="#FF363636">
-        <TextBox x:Name="ConsoleOutput" HorizontalAlignment="Left" Height="290" Margin="37,54,0,0" Text="TextBox" VerticalAlignment="Top" Width="599" IsReadOnly="True"/>
+        <TextBox x:Name="ConsoleOutput" HorizontalAlignment="Left" Height="243" Margin="37,54,0,0" VerticalAlignment="Top" Width="449" IsReadOnly="True"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="491,54,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>

@@ -9,7 +9,7 @@ namespace WhatTheBlam
     /// <summary>
     /// Information regarding how to deconstruct the map tags
     /// </summary>
-    class MapHeader
+    public class MapHeader
     {
         
         public uint_4 head_signiture;    //not really a long, but 4 bytes either being head or daeh (1684104552 or 1751474532) (big endian or little endian)
@@ -33,7 +33,8 @@ namespace WhatTheBlam
         public byte scenario_load_type_short;
 
         public char unknown1;
-        public byte unknown2;
+        public byte tracked_build;
+        public char unknown2;
         public char unknown3;
 
         public uint_4 unknown4;

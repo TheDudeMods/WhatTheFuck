@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.IO;
+using WhatTheBlam;
+
+
 namespace WhatTheFuck
 {
     /// <summary>
@@ -23,6 +28,19 @@ namespace WhatTheFuck
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //Test code, disregard
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if(fileDialog.ShowDialog() == true)
+            {
+                Stream str = File.Open(fileDialog.FileName, FileMode.Open);
+                MapHeader mh = HeaderReader.ReadHeader(str);
+
+                ConsoleOutput.AppendText("Read in the map file!\n");  
+            }
         }
     }
 }
