@@ -77,7 +77,7 @@ namespace WhatTheBlam
             return tmp;
         }
 
-        public static uint_4[] BuildArray(byte[] op)
+        public static uint_4[] BuildArray(byte[] op, bool reverse = false)
         {
             if(op.Length % 4 != 0)
             {
@@ -92,6 +92,7 @@ namespace WhatTheBlam
                 tmp[i].bytes[1] = op[(i * 4) + 1];
                 tmp[i].bytes[2] = op[(i * 4) + 2];
                 tmp[i].bytes[3] = op[(i * 4) + 3];
+                if (reverse) Array.Reverse(tmp[i].bytes);
             }
             return tmp;
         }
@@ -167,7 +168,7 @@ namespace WhatTheBlam
             return tmp;
         }
 
-        public static file_bounds[] BuildArray(byte[] op)
+        public static file_bounds[] BuildArray(byte[] op, bool reverse = false)
         {
             if (op.Length % 8 != 0)
             {
@@ -181,6 +182,11 @@ namespace WhatTheBlam
                 byte[] buff = new byte[8];
                 Array.Copy(op, i * 8, buff, 0, 8);
                 tmp[i] = buff;
+                if (reverse)
+                {
+                    Array.Reverse(tmp[i].offset.bytes);
+                    Array.Reverse(tmp[i].size.bytes);
+                }
             }
             return tmp;
         }
