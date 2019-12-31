@@ -270,8 +270,13 @@ namespace WhatTheBlam
             mh.rsa = uint_4.BuildArray(ExtractBytes(raw, 0x03B4, 0x0100), bigEndian);
 
 
+            //for reach 
+            //0 = debug section
+            //1 = resource section
+            //2 = tags section
+            //3 = localizations
             mh.section_offsets = uint_4.BuildArray(ExtractBytes(raw, 0x04B4, 0x0010), bigEndian);
-
+            //same layout as above but contains section boundary information
             mh.section_bounds = file_bounds.BuildArray(ExtractBytes(raw, 0x04C4, 0x0020), bigEndian);
 
             mh.guid = uint_4.BuildArray(ExtractBytes(raw, 0x04E4, 0x0010), bigEndian);
