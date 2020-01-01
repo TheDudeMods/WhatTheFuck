@@ -56,7 +56,7 @@ namespace WhatTheFuck
                 str.Read(debug_section, 0, debug_size);
 
 
-                //Then get the resources section. Images and models maybe?
+                //Then get the resources section. Images and models maybe? and strings probably!
                 int resource_offset = mh.section_offsets[1].ToInt() + mh.section_bounds[1].offset.ToInt();
                 int resource_size = mh.section_bounds[1].size.ToInt();
                 byte[] resource_section = new byte[resource_size];

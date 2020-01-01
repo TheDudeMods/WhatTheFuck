@@ -13,74 +13,75 @@ namespace WhatTheBlam
     {
         
         public uint_4 head_signiture;    //not really a long, but 4 bytes either being head or daeh (1684104552 or 1751474532) (big endian or little endian)
-        public uint_4 engine_version;
-        public uint_4 mapfile_length;
-        public uint_4 mapfile_compressed_length;
+                                                            //0x0000    little endian .map file data offsets, useful for debugging and exploration (and masochists that like to edit in the raw)
+        public uint_4 engine_version;                       //0x0004
+        public uint_4 mapfile_length;                       //0x0008
+        public uint_4 mapfile_compressed_length;            //0x000C
 
-        public uint_8 tags_header_address;
+        public uint_8 tags_header_address;                  //0x0010
 
-        public uint_4 memory_buffer_offset;
-        public uint_4 memory_buffer_size;
+        public uint_4 memory_buffer_offset;                 //0x0018
+        public uint_4 memory_buffer_size;                   //0x001C
 
-        public char[] source_file = new char[256];
+        public char[] source_file = new char[256];          //0x0020
 
-        public char[] build = new char[32];
+        public char[] build = new char[32];                 //0x0120
 
-        public byte scenario_type;
-        public byte scenario_short;
+        public byte scenario_type;                          //0x0140    think these should actually be a Int16
+        public byte scenario_short;                         //0x0141
 
-        public byte scenario_load_type;
-        public byte scenario_load_type_short;
+        public byte scenario_load_type;                     //0x0142    maybe the same with these two as  well
+        public byte scenario_load_type_short;               //0x0143
 
-        public char unknown1;
-        public byte tracked_build;
-        public char unknown2;
-        public char unknown3;
+        public char unknown1;                               //0x0144
+        public byte tracked_build;                          //0x0145
+        public char unknown2;                               //0x0146
+        public char unknown3;                               //0x0147
 
-        public uint_4 unknown4;
-        public uint_4 unknown5;
-        public uint_4 unknown6;
-        public uint_4 unknown7;
-        public uint_4 unknown8;
+        public uint_4 unknown4;                             //0x0148
+        public uint_4 unknown5;                             //0x014C
+        public uint_4 unknown6;                             //0x0150
+        public uint_4 unknown7;                             //0x0154
+        public uint_4 unknown8;                             //0x0158
 
-        public uint_4 string_id_count;
-        public uint_4 string_ids_buffer_size;
-        public uint_4 string_id_indices_offset;
-        public uint_4 string_ids_buffer_offset;
+        public uint_4 string_id_count;                      //0x015C
+        public uint_4 string_ids_buffer_size;               //0x0160
+        public uint_4 string_id_indices_offset;             //0x0164
+        public uint_4 string_ids_buffer_offset;             //0x0168
 
-        public uint_4 unknown9;
+        public uint_4 unknown9;                             //0x016C
         
-        public uint_8 timestamp;
-        public uint_8 mainmenu_timestamp;
-        public uint_8 shared_timestamp;
-        public uint_8 campaign_timestamp;
-        public uint_8 multiplayer_timestamp;
+        public uint_8 timestamp;                            //0x0170
+        public uint_8 mainmenu_timestamp;                   //0x0178
+        public uint_8 shared_timestamp;                     //0x0180
+        public uint_8 campaign_timestamp;                   //0x0188
+        public uint_8 multiplayer_timestamp;                //0x0190
 
-        public char[] name = new char[32];
+        public char[] name = new char[32];                  //0x0198
 
-        public uint_4 unknown10;
+        public uint_4 unknown10;                            //0x01B8
 
-        public char[] scenario_path = new char[256];
+        public char[] scenario_path = new char[256];        //0x01BC
 
-        public uint_4 minor_version;
+        public uint_4 minor_version;                        //0x02BC
 
-        public uint_4 tag_name_count;
-        public uint_4 tag_names_buffer_offset;
-        public uint_4 tag_names_buffer_size;
-        public uint_4 tag_name_indices_offset;
+        public uint_4 tag_name_count;                       //0x02C0
+        public uint_4 tag_names_buffer_offset;              //0x02C4
+        public uint_4 tag_names_buffer_size;                //0x02C8
+        public uint_4 tag_name_indices_offset;              //0x02CC
 
-        public uint_4 checksum;
+        public uint_4 checksum;                             //0x02D0
 
 
-        public uint_4 unknown11;
-        public uint_4 unknown12;
-        public uint_4 unknown13;
-        public uint_4 unknown14;
-        public uint_4 unknown15;
-        public uint_4 unknown16;
-        public uint_4 unknown17;
-        public uint_4 unknown18;
-        public uint_4 unknown19;
+        public uint_4 unknown11;                            //0x02D4
+        public uint_4 unknown12;                            //0x02D8
+        public uint_4 unknown13;                            //0x02DC
+        public uint_4 unknown14;                            //0x02E0
+        public uint_4 unknown15;                            //0x02E4
+        public uint_4 unknown16;                            //0x02E8
+        public uint_4 unknown17;                            //0x02EC
+        public uint_4 unknown18;                            //0x02F0
+        public uint_4 unknown19;                            //0x02F4
 
         public uint_8 virtual_base_address;
 
