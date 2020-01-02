@@ -46,8 +46,8 @@ namespace WhatTheFuck
                 ///
 
                 //First get the debug section. What the fuck is this for anyways?
-                int debug_offset = mh.section_offsets[0].ToInt() + mh.section_bounds[0].offset.ToInt();
-                int debug_size = mh.section_bounds[0].size.ToInt();
+                int debug_offset = (int)mh.section_offsets[0] + (int)mh.section_bounds[0].offset;
+                int debug_size = (int)mh.section_bounds[0].size;
                 byte[] debug_section = new byte[debug_size];
 
                 if(str.Position != debug_offset)
@@ -57,8 +57,8 @@ namespace WhatTheFuck
 
 
                 //Then get the resources section. Images and models maybe? and strings probably!
-                int resource_offset = mh.section_offsets[1].ToInt() + mh.section_bounds[1].offset.ToInt();
-                int resource_size = mh.section_bounds[1].size.ToInt();
+                int resource_offset = (int)mh.section_offsets[1] + (int)mh.section_bounds[1].offset;
+                int resource_size = (int)mh.section_bounds[1].size;
                 byte[] resource_section = new byte[resource_size];
 
                 if (str.Position != resource_offset)
@@ -67,8 +67,8 @@ namespace WhatTheFuck
                 str.Read(resource_section, 0, resource_size);
 
                 //Get the actual tags
-                int tag_offset = mh.section_offsets[2].ToInt() + mh.section_bounds[2].offset.ToInt();
-                int tag_size = mh.section_bounds[2].size.ToInt();
+                int tag_offset = (int)mh.section_offsets[2] + (int)mh.section_bounds[2].offset;
+                int tag_size = (int)mh.section_bounds[2].size;
                 byte[] tag_section = new byte[tag_size];
 
                 long pos = str.Position;

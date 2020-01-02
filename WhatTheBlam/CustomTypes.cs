@@ -156,16 +156,29 @@ namespace WhatTheBlam
     /// </summary>
     public class file_bounds
     {
-        public uint_4 offset = new uint_4();
-        public uint_4 size = new uint_4();
+        public uint offset;
+        public uint size;
 
-        public static implicit operator file_bounds(byte[] op)
+        /*public static implicit operator file_bounds(byte[] op)
         {
             if (op.Length != 8) throw new Exception("Invalid conversion from byte array of length " + op.Length + " to file_bounds.");
             file_bounds tmp = new file_bounds();
             Array.Copy(op, 0, tmp.offset.bytes, 0, 4);
             Array.Copy(op, 4, tmp.size.bytes, 0, 4);
             return tmp;
+        }*/
+
+        public file_bounds(byte[] raw, bool reverse = false)
+        {
+            if(raw.Length != 8)
+            {
+                throw new Exception("Raw byte array size does not match required byte length!");
+            }
+            byte[] _offset = Util.ExtractBytes(raw, 0, 4, reverse);
+            byte[] _size = Util.ExtractBytes(raw, 0, 4, reverse);
+            this.offset = BitConverter.ToUInt32(_offset, 0);
+            this.size = BitConverter.ToUInt32(_size, 0);
+
         }
 
         public static file_bounds[] BuildArray(byte[] op, bool reverse = false)
@@ -178,7 +191,7 @@ namespace WhatTheBlam
             file_bounds[] tmp = new file_bounds[len];
             for (int i = 0; i < len; ++i)
             {
-                tmp[i] = new file_bounds();
+                /*tmp[i] = new file_bounds();
                 byte[] buff = new byte[8];
                 Array.Copy(op, i * 8, buff, 0, 8);
                 tmp[i] = buff;
@@ -186,7 +199,8 @@ namespace WhatTheBlam
                 {
                     Array.Reverse(tmp[i].offset.bytes);
                     Array.Reverse(tmp[i].size.bytes);
-                }
+                }*/
+                tmp[i] = new file_bounds(Util.ExtractBytes(op, i * 8, 8, reverse));
             }
             return tmp;
         }
@@ -195,7 +209,7 @@ namespace WhatTheBlam
     /// <summary>
     /// Helper class to read types from a stream.
     /// </summary>
-    static class HaloTypeReader
+    /*static class HaloTypeReader
     {
         public static uint_2 ReadUInt2(Stream s)
         {
@@ -285,5 +299,5 @@ namespace WhatTheBlam
             ReadType(out tmp.size, s);
             out_fb = tmp;
         }
-    }
+    }*/
 }
