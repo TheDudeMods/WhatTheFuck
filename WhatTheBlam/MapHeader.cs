@@ -87,40 +87,43 @@ namespace WhatTheBlam
 
         public uint xdx_version;                          //0x0300
         
-        public uint unknown20;                            //0x0308
+        public uint unknown20;                            //0x0304
 
         //Not totally sure how these get used yet but will investigate further
         //Shamelessly stole these from zeta tool
         //Credit where credit is due https://github.com/camden-smallwood/zeta
+
         //Looking at how Assembly uses this section, looks like they are offsets
-        //and lengths. Will investigate further
-        public UInt16 tag_post_link_buffer;
-        public UInt16 tag_language_dependent_read_only_buffer;
-        public UInt16 tag_language_dependent_read_write_buffer;
-        public UInt16 tag_language_neutral_read_write_buffer;
-        public UInt16 tag_language_neutral_write_combined_buffer;
-        public UInt16 tag_language_neutral_read_only_buffer;
+        //and lengths. Will investigate further.
 
-        public ulong unknown21;
-        public ulong unknown22;
+        //Assembly calls these partitions, and as a 6x2 array with array[i][0] = load address and array[i][1] = size
+        public UInt16 tag_post_link_buffer;                                 //0x0308
+        public UInt16 tag_language_dependent_read_only_buffer;              //0x0318
+        public UInt16 tag_language_dependent_read_write_buffer;             //0x0328
+        public UInt16 tag_language_neutral_read_write_buffer;               //0x0338
+        public UInt16 tag_language_neutral_write_combined_buffer;           //0x0348
+        public UInt16 tag_language_neutral_read_only_buffer;                //0x0358
 
-        public uint[] sha1_a = new uint[5];
-        public uint[] sha1_b = new uint[5];
-        public uint[] sha1_c = new uint[5];
+        public ulong unknown21;                             //0x0368
+        public ulong unknown22;                             //0x0370
 
-        public uint[] rsa = new uint[64];
+        public uint[] sha1_a = new uint[5];                 //0x0378
+        public uint[] sha1_b = new uint[5];                 //0x038C
+        public uint[] sha1_c = new uint[5];                 //0x03A0
 
-        public uint[] section_offsets = new uint[4];
+        public uint[] rsa = new uint[64];                   //0x03B4
+
+        public uint[] section_offsets = new uint[4];        //0x04B4
 
 
-        public file_bounds[] section_bounds = new file_bounds[4];
+        public file_bounds[] section_bounds = new file_bounds[4];           //0x04C4
 
-        public uint[] guid = new uint[4];
+        public uint[] guid = new uint[4];                   //0x04E4
 
-        public uint[] unknown23 = new uint[0x26C2];
+        public uint[] unknown23 = new uint[0x26C2];         //0x04F4
 
         public uint foot_signiture; //not really a long, but 4 bytes either being foot or toof (1953460070 or 1718579060) (big endian or little endian)
-
+                                                            //0x9FFC
     }
 
 
