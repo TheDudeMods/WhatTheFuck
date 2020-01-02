@@ -44,10 +44,10 @@ namespace WhatTheBlam
         public uint unknown7;                             //0x0154
         public uint unknown8;                             //0x0158
 
-        public uint string_id_count;                      //0x015C
-        public uint string_ids_buffer_size;               //0x0160
-        public uint string_id_indices_offset;             //0x0164
-        public uint string_ids_buffer_offset;             //0x0168
+        public int string_id_count;                      //0x015C
+        public int string_ids_buffer_size;               //0x0160
+        public int string_id_indices_offset;             //0x0164
+        public int string_ids_buffer_offset;             //0x0168
 
         public uint unknown9;                             //0x016C
         
@@ -65,10 +65,10 @@ namespace WhatTheBlam
 
         public uint minor_version;                        //0x02BC
 
-        public uint tag_name_count;                       //0x02C0
-        public uint tag_names_buffer_offset;              //0x02C4
-        public uint tag_names_buffer_size;                //0x02C8
-        public uint tag_name_indices_offset;              //0x02CC
+        public int tag_name_count;                       //0x02C0
+        public int tag_names_buffer_offset;              //0x02C4
+        public int tag_names_buffer_size;                //0x02C8
+        public int tag_name_indices_offset;              //0x02CC
 
         public uint checksum;                             //0x02D0
 
@@ -97,12 +97,13 @@ namespace WhatTheBlam
         //and lengths. Will investigate further.
 
         //Assembly calls these partitions, and as a 6x2 array with array[i][0] = load address and array[i][1] = size
-        public UInt16 tag_post_link_buffer;                                 //0x0308
+        /*public UInt16 tag_post_link_buffer;                                 //0x0308
         public UInt16 tag_language_dependent_read_only_buffer;              //0x0318
         public UInt16 tag_language_dependent_read_write_buffer;             //0x0328
         public UInt16 tag_language_neutral_read_write_buffer;               //0x0338
         public UInt16 tag_language_neutral_write_combined_buffer;           //0x0348
-        public UInt16 tag_language_neutral_read_only_buffer;                //0x0358
+        public UInt16 tag_language_neutral_read_only_buffer;                //0x0358*/
+        //public file_bounds[] partitions = new file_bounds[6];               //0x0308  can't use file_bounds because these are longs and not ints
 
         public ulong unknown21;                             //0x0368
         public ulong unknown22;                             //0x0370
@@ -195,10 +196,10 @@ namespace WhatTheBlam
             mh.unknown7 = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0154, 0x004, bigEndian), 0);
             mh.unknown8 = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0158, 0x004, bigEndian), 0);
 
-            mh.string_id_count = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x015C, 0x004, bigEndian), 0);
-            mh.string_ids_buffer_size = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0160, 0x004, bigEndian), 0);
-            mh.string_id_indices_offset = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0164, 0x004, bigEndian), 0);
-            mh.string_ids_buffer_offset = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0168, 0x004, bigEndian), 0);
+            mh.string_id_count = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x015C, 0x004, bigEndian), 0);
+            mh.string_ids_buffer_size = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x0160, 0x004, bigEndian), 0);
+            mh.string_id_indices_offset = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x0164, 0x004, bigEndian), 0);
+            mh.string_ids_buffer_offset = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x0168, 0x004, bigEndian), 0);
 
             mh.unknown9 = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x016C, 0x004, bigEndian), 0);
 
@@ -216,10 +217,10 @@ namespace WhatTheBlam
 
             mh.minor_version = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02BC, 0x004, bigEndian), 0);
 
-            mh.tag_name_count = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02C0, 0x004, bigEndian), 0);
-            mh.tag_names_buffer_offset = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02C4, 0x004, bigEndian), 0);
-            mh.tag_names_buffer_size = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02C8, 0x004, bigEndian), 0);
-            mh.tag_name_indices_offset = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02CC, 0x004, bigEndian), 0);
+            mh.tag_name_count = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x02C0, 0x004, bigEndian), 0);
+            mh.tag_names_buffer_offset = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x02C4, 0x004, bigEndian), 0);
+            mh.tag_names_buffer_size = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x02C8, 0x004, bigEndian), 0);
+            mh.tag_name_indices_offset = BitConverter.ToInt32(Util.ExtractBytes(raw, 0x02CC, 0x004, bigEndian), 0);
 
             mh.checksum = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x02D0, 0x004, bigEndian), 0);
 
@@ -239,13 +240,16 @@ namespace WhatTheBlam
 
             mh.unknown20 = BitConverter.ToUInt32(Util.ExtractBytes(raw, 0x0304, 0x004, bigEndian), 0);
 
-            mh.tag_post_link_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0308, 0x0010, bigEndian), 0);                       //using Util.ExtractBytes allows for a quick and easy endian swap
-            mh.tag_language_dependent_read_only_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0318, 0x0010, bigEndian), 0);
-            mh.tag_language_dependent_read_write_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0328, 0x0010, bigEndian), 0);
+            /* mh.tag_post_link_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0308, 0x0010, bigEndian), 0);                       //using Util.ExtractBytes allows for a quick and easy endian swap
+             mh.tag_language_dependent_read_only_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0318, 0x0010, bigEndian), 0);
+             mh.tag_language_dependent_read_write_buffer = BitConverter.ToUInt16(Util.ExtractBytes(raw, 0x0328, 0x0010, bigEndian), 0);
 
-            mh.tag_language_neutral_read_write_buffer = BitConverter.ToUInt16(raw, 0x0338);
-            mh.tag_language_neutral_write_combined_buffer = BitConverter.ToUInt16(raw, 0x0348);
-            mh.tag_language_neutral_read_only_buffer = BitConverter.ToUInt16(raw, 0x0358);
+             mh.tag_language_neutral_read_write_buffer = BitConverter.ToUInt16(raw, 0x0338);
+             mh.tag_language_neutral_write_combined_buffer = BitConverter.ToUInt16(raw, 0x0348);
+             mh.tag_language_neutral_read_only_buffer = BitConverter.ToUInt16(raw, 0x0358);*/
+
+            //changing this to partitions like Assembly instead of whatever the above is. Can't actually use file_bounds because these are longs and file_bounds uses ints
+            //mh.partitions = file_bounds.BuildArray(Util.ExtractBytes(raw, 0x0308, 0x0060), bigEndian);
 
             mh.unknown21 = BitConverter.ToUInt64(Util.ExtractBytes(raw, 0x0368, 0x008, bigEndian), 0);
             mh.unknown22 = BitConverter.ToUInt64(Util.ExtractBytes(raw, 0x0370, 0x008, bigEndian), 0);

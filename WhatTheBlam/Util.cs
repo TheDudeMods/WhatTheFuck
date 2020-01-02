@@ -30,7 +30,12 @@ namespace WhatTheBlam
             return tmp;
         }
 
-
+        /// <summary>
+        /// Creates an array of Int32 from an array of bytes and accounts for endianness.
+        /// </summary>
+        /// <param name="array">The byte array to convert.</param>
+        /// <param name="reverse">Optionaly reverse the endianness.</param>
+        /// <returns>An array of ints.</returns>
         public static int[] IntArray(byte[] array, bool reverse = false)
         {
             if (array.Length % 4 != 0)
@@ -48,13 +53,11 @@ namespace WhatTheBlam
         }
 
         /// <summary>
-        /// Extracts an array of 
+        /// Creates an array of UInt32 from an array of bytes and accounts for endianness.
         /// </summary>
-        /// <param name="array"></param>
-        /// <param name="offset"></param>
-        /// <param name="count"></param>
-        /// <param name="reverse"></param>
-        /// <returns></returns>
+        /// <param name="array">The byte array to convert.</param>
+        /// <param name="reverse">Optionaly reverse the endianness.</param>
+        /// <returns>An array of uints.</returns>
         public static uint[] UIntArray(byte[] array, bool reverse = false)
         {
             if (array.Length % 4 != 0)

@@ -152,7 +152,7 @@ namespace WhatTheBlam
 
     /// <summary>
     /// Cache file section bounds.
-    /// Contains uint_4 offset, and uint_4 size
+    /// Contains an offset, and a size
     /// </summary>
     public class file_bounds
     {
@@ -168,6 +168,12 @@ namespace WhatTheBlam
             return tmp;
         }*/
 
+        public file_bounds(uint offset, uint size)
+        {
+            this.offset = offset;
+            this.size = size;
+        }
+
         public file_bounds(byte[] raw, bool reverse = false)
         {
             if(raw.Length != 8)
@@ -175,7 +181,7 @@ namespace WhatTheBlam
                 throw new Exception("Raw byte array size does not match required byte length!");
             }
             byte[] _offset = Util.ExtractBytes(raw, 0, 4, reverse);
-            byte[] _size = Util.ExtractBytes(raw, 0, 4, reverse);
+            byte[] _size = Util.ExtractBytes(raw, 4, 4, reverse);
             this.offset = BitConverter.ToUInt32(_offset, 0);
             this.size = BitConverter.ToUInt32(_size, 0);
 
